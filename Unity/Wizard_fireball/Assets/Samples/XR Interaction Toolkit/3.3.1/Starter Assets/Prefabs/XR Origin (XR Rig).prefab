@@ -1009,9 +1009,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_LeftHand: {fileID: 4067439734582199339}
-  m_RightHand: {fileID: 4730875683008055874}
-  m_LeftController: {fileID: 4067439734582199339}
-  m_RightController: {fileID: 4730875683008055874}
+  m_RightHand: {fileID: 0}
+  m_LeftController: {fileID: 202364687}
+  m_RightController: {fileID: 0}
   m_TrackedHandModeStarted:
     m_PersistentCalls:
       m_Calls: []
@@ -1800,11 +1800,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f7511fbc40ae7a4b89c3298a3de199d, type: 3}
---- !u!1 &4730875683008055874 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3133494152545806682, guid: 3f7511fbc40ae7a4b89c3298a3de199d, type: 3}
-  m_PrefabInstance: {fileID: 7699776619220247320}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5398869216940708088 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2321527512367231968, guid: 3f7511fbc40ae7a4b89c3298a3de199d, type: 3}
