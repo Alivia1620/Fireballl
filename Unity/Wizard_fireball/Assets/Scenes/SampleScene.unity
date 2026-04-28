@@ -1705,6 +1705,7 @@ GameObject:
   - component: {fileID: 5375325707694121469}
   - component: {fileID: 5546299890746640594}
   - component: {fileID: 8069409822533990821}
+  - component: {fileID: 8069409822533990822}
   m_Layer: 0
   m_Name: Wizard Juice
   m_TagString: Untagged
@@ -2043,6 +2044,7 @@ GameObject:
   - component: {fileID: 4168272274076064469}
   - component: {fileID: 3440352041879239287}
   - component: {fileID: 1461369439321954370}
+  - component: {fileID: 4168272274076064470}
   m_Layer: 0
   m_Name: Spoon
   m_TagString: Untagged
@@ -2238,13 +2240,35 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3117338726980740089}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.65928584, y: 0.5392316, z: 0.14596279, w: 0.50325567}
-  m_LocalPosition: {x: -0.000998686, y: -0.0025607198, z: 0.0023852875}
+  m_LocalRotation: {x: -0.6592859, y: 0.53923166, z: 0.1459628, w: 0.5032557}
+  m_LocalPosition: {x: -0.0009986879, y: -0.0025607443, z: 0.0023853364}
   m_LocalScale: {x: 61.265656, y: 59.471497, z: 85.10017}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3708902051115112795}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &4168272274076064470
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3117338726980740089}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 53feddaf298a8504da7cc3b543242551, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4277033759625813583
 GameObject:
   m_ObjectHideFlags: 0
@@ -3253,7 +3277,7 @@ Transform:
   m_GameObject: {fileID: 650555430683309125}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -0, y: 0.59977233, z: 0}
+  m_LocalPosition: {x: 0, y: 0.59977233, z: 0}
   m_LocalScale: {x: 65.5856, y: 65.5856, z: 65.5856}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3280,6 +3304,28 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.016679758, y: 0.01778941, z: 0.007207246}
   m_Center: {x: 0.0002935386, y: 0.00010671481, z: -0.004105413}
+--- !u!95 &8069409822533990822
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 650555430683309125}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ccbb051f077bc7a4ba8be14efc7efa9f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!23 &8169290781240763901
 MeshRenderer:
   m_ObjectHideFlags: 0
