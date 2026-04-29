@@ -6,11 +6,26 @@ TagManager:
   tags:
   - StaticObject
   - Ingredient
+  - QDSUIBackplateGradient
+  - QDSUIToggleBorderlessButton
+  - QDSUIToggleCheckboxRadio
+  - QDSUITooltip
+  - QDSUISharedThemeColor
+  - QDSUIToggleSwitch
+  - QDSUIAccentColor
+  - QDSUIBorderlessButton
+  - QDSUIIcon
+  - QDSUIDestructiveButton
+  - QDSUISecondaryButton
+  - QDSUIPrimaryButton
+  - QDSUITextInvertedColor
+  - QDSUITextSecondaryInvertedColor
+  - QDSUIToggleButton
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Overlay UI
   - Water
   - UI
   - 
@@ -38,7 +53,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - OVROverlayCanvas Rendering
   m_SortingLayers:
   - name: Default
     uniqueID: 0
