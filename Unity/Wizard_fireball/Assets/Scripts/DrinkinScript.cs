@@ -9,6 +9,7 @@ public class DrinkinScript : MonoBehaviour
     public Animator animator;
     public string drinkAnimationBool = "drink";
     public Transform headTransform;
+    public FireballCasting fireballCasting;
     private bool hasDrunk;
     public float drinkAnimationDuration = 2f; // Duration of the drinking animation
 
@@ -53,6 +54,10 @@ public class DrinkinScript : MonoBehaviour
         if (animator != null)
         {
             animator.SetBool(drinkAnimationBool, true);
+        }
+        if (fireballCasting != null)
+        {
+            fireballCasting.EnableCasting();
         }
         // Add drinking sound or particle effect here if needed
         // Start coroutine to destroy after animation
