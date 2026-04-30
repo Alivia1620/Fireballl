@@ -106,6 +106,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5c7aa96e01037df45912132cccad5b27, type: 3}
       insertIndex: -1
       addedObject: {fileID: 517886322218826480}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5c7aa96e01037df45912132cccad5b27, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -6084811658262052600}
   m_SourcePrefab: {fileID: 100100000, guid: 5c7aa96e01037df45912132cccad5b27, type: 3}
 --- !u!1 &6229165730210914822 stripped
 GameObject:
@@ -207,3 +210,26 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 7.43, z: 6.94}
   m_Center: {x: 0, y: 3, z: 0}
+--- !u!114 &-6084811658262052600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6229165730210914822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43f86b14a27b52f4f9298c33015b5c26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Oculus.Interaction::Oculus.Interaction.Grabbable
+  _transferOnSecondSelection: 0
+  _addNewPointsToFront: 0
+  _forwardElement: {fileID: 0}
+  _oneGrabTransformer: {fileID: 0}
+  _twoGrabTransformer: {fileID: 0}
+  _targetTransform: {fileID: 0}
+  _maxGrabPoints: -1
+  _rigidbody: {fileID: 0}
+  _kinematicWhileSelected: 1
+  _throwWhenUnselected: 1
+  _forceKinematicDisabled: 0
