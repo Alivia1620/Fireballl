@@ -1,48 +1,38 @@
+using Oculus.Interaction;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit;
-using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class BookController : MonoBehaviour
 {
     public Animator animator;
+
     private int closeBookAnim = 0;
     private int openBookAnim = 1;
+
     public bool isBookOpen;
-    private bool noLoop;
 
     public GameObject UI;
 
-    // Use local or world transform when applying the closed transform
     public bool useLocalTransform = true;
-
-    // How long to move back to the original transform (seconds). 0 = instant.
     public float closeMoveDuration = 0.5f;
 
-    // Captured original transform
     private Vector3 originalPosition;
     private Quaternion originalRotation;
 
-    // Coroutine handle so we don't start multiple simultaneous moves
     private Coroutine closeCoroutine;
 
-    // Optional: assign in inspector or it'll be grabbed from the same GameObject
-    public XRBaseInteractable interactable;
+    // Meta SDK component
+    public Grabbable grabbable;
 
     void Awake()
     {
         if (animator == null)
-        {
             animator = GetComponent<Animator>();
-        }
 
-        if (interactable == null)
-        {
-            interactable = GetComponent<XRBaseInteractable>();
-        }
+        if (grabbable == null)
+            grabbable = GetComponent<Grabbable>();
 
-        // Capture the original transform on awake
+        // Store original transform
         if (useLocalTransform)
         {
             originalPosition = transform.localPosition;
@@ -57,41 +47,37 @@ public class BookController : MonoBehaviour
 
     void OnEnable()
     {
-        if (interactable != null)
+        if (grabbable != null)
         {
-            interactable.selectEntered.AddListener(OnSelectEntered);
-            interactable.selectExited.AddListener(OnSelectExited);
+            grabbable.WhenPointerEventRaised += HandlePointerEvent;
         }
     }
 
     void OnDisable()
     {
-        if (interactable != null)
+        if (grabbable != null)
         {
-            interactable.selectEntered.RemoveListener(OnSelectEntered);
-            interactable.selectExited.RemoveListener(OnSelectExited);
+            grabbable.WhenPointerEventRaised -= HandlePointerEvent;
         }
     }
 
-    void Update()
+    private void HandlePointerEvent(PointerEvent evt)
     {
-        if (isBookOpen == true && noLoop == false)
+        // Grab start
+        if (evt.Type == PointerEventType.Select)
         {
-            OpenBook();
-            noLoop = true;
+            OnGrab();
         }
-
-        if (isBookOpen == false)
+        // Grab end
+        else if (evt.Type == PointerEventType.Unselect)
         {
-            CloseBook();
-            noLoop = false;
+            OnRelease();
         }
     }
 
-    // XR grab (select) callbacks
-    private void OnSelectEntered(SelectEnterEventArgs args)
+    private void OnGrab()
     {
-        // If we're moving back and the user grabs the book, stop the move
+        // Stop return animation if grabbing again
         if (closeCoroutine != null)
         {
             StopCoroutine(closeCoroutine);
@@ -99,25 +85,19 @@ public class BookController : MonoBehaviour
         }
 
         isBookOpen = true;
-    }
 
-    private void OnSelectExited(SelectExitEventArgs args)
-    {
-        isBookOpen = false;
-    }
-
-    void OpenBook()
-    {
+        // Play open animation immediately
         animator.SetInteger("Anim", openBookAnim);
         //UI.SetActive(true);
     }
 
-    void CloseBook()
+    private void OnRelease()
     {
+        isBookOpen = false;
+
         animator.SetInteger("Anim", closeBookAnim);
         //UI.SetActive(false);
 
-        // If already moving back, don't start another coroutine
         if (closeCoroutine == null)
         {
             closeCoroutine = StartCoroutine(MoveToOriginal(closeMoveDuration));
@@ -128,23 +108,13 @@ public class BookController : MonoBehaviour
     {
         if (duration <= 0f)
         {
-            // Instant snap
-            if (useLocalTransform)
-            {
-                transform.localPosition = originalPosition;
-                transform.localRotation = originalRotation;
-            }
-            else
-            {
-                transform.position = originalPosition;
-                transform.rotation = originalRotation;
-            }
-
+            ApplyTransform(originalPosition, originalRotation);
             closeCoroutine = null;
             yield break;
         }
 
         float elapsed = 0f;
+
         Vector3 startPos = useLocalTransform ? transform.localPosition : transform.position;
         Quaternion startRot = useLocalTransform ? transform.localRotation : transform.rotation;
 
@@ -156,32 +126,26 @@ public class BookController : MonoBehaviour
             Vector3 pos = Vector3.Lerp(startPos, originalPosition, t);
             Quaternion rot = Quaternion.Slerp(startRot, originalRotation, t);
 
-            if (useLocalTransform)
-            {
-                transform.localPosition = pos;
-                transform.localRotation = rot;
-            }
-            else
-            {
-                transform.position = pos;
-                transform.rotation = rot;
-            }
+            ApplyTransform(pos, rot);
 
             yield return null;
         }
 
-        // Ensure final values are exact
+        ApplyTransform(originalPosition, originalRotation);
+        closeCoroutine = null;
+    }
+
+    private void ApplyTransform(Vector3 pos, Quaternion rot)
+    {
         if (useLocalTransform)
         {
-            transform.localPosition = originalPosition;
-            transform.localRotation = originalRotation;
+            transform.localPosition = pos;
+            transform.localRotation = rot;
         }
         else
         {
-            transform.position = originalPosition;
-            transform.rotation = originalRotation;
+            transform.position = pos;
+            transform.rotation = rot;
         }
-
-        closeCoroutine = null;
     }
 }
