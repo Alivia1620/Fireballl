@@ -6,7 +6,7 @@ public class DrinkinScript : MonoBehaviour
 {
     private XRGrabInteractable grabInteractable;
     public float drinkDistance = 0.3f; // Distance to camera to trigger drinking
-    public Animator animator;
+    // public Animator animator;
     public string drinkAnimationBool = "drink";
     public Transform headTransform;
     public FireballCasting fireballCasting;
@@ -15,12 +15,7 @@ public class DrinkinScript : MonoBehaviour
 
     void Start()
     {
-        // animator = GetComponent<Animator>();
         grabInteractable = GetComponent<XRGrabInteractable>();
-        if (animator == null)
-        {
-            animator = GetComponent<Animator>();
-        }
 
         if (headTransform == null)
         {
@@ -37,13 +32,27 @@ public class DrinkinScript : MonoBehaviour
 
     void OnTriggerStay(Collider collision)
     {
-        //find the collision animator
-        Animator collisionAnimator = collision.GetComponent<Animator>();
-        if (hasDrunk || grabInteractable == null)
+        // Animator collisionAnimator = collision.GetComponent<Animator>();
+        // headTransform = GameObject.FindGameObjectsWithTag("Head")[0].transform;
+
+         if (hasDrunk || grabInteractable == null)
             return;
+        
+        if (headTransform == null)
+        {
+            var heads = GameObject.FindGameObjectsWithTag("Head");
+            if (heads.Length > 0)
+            headTransform = heads[0].transform;
+            else
+                return;
+        }
 
         if (grabInteractable.isSelected && collision.CompareTag("Head"))
         {
+            // Only grab the animator from the Head if none is assigned in Inspector
+            // if (animator == null)
+            //    animator = collision.GetComponent<Animator>();
+
             DrinkPotion();
         }
     }
@@ -54,26 +63,26 @@ public class DrinkinScript : MonoBehaviour
         Debug.Log("Drinking potion!");
         hasDrunk = true;
         // Play drinking animation
-        if (animator != null)
-        {
-            animator.SetBool(drinkAnimationBool, true);
-        }
+        //if (animator != null)
+        // {
+            // animator.SetBool(drinkAnimationBool, true);
+        // }
         if (fireballCasting != null)
         {
             fireballCasting.EnableCasting();
         }
         // Add drinking sound or particle effect here if needed
         // Start coroutine to destroy after animation
-        StartCoroutine(DestroyAfterAnimation());
+        // StartCoroutine(DestroyAfterAnimation());
     }
 
-    private IEnumerator DestroyAfterAnimation()
-    {
-        yield return new WaitForSeconds(drinkAnimationDuration);
-        if (animator != null)
-        {
-            animator.SetBool(drinkAnimationBool, false);
-        }
-        Destroy(gameObject);
-    }
+    // private IEnumerator DestroyAfterAnimation()
+    // {
+        // yield return new WaitForSeconds(drinkAnimationDuration);
+        // if (animator != null)
+        // {
+            // animator.SetBool(drinkAnimationBool, false);
+        // }
+        //Destroy(gameObject);
+    //}
 }

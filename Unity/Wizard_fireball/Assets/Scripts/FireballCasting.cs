@@ -19,12 +19,15 @@ public class FireballCasting : MonoBehaviour
 
     void Start()
     {
+		TryFindTransforms();
         handTransform = GameObject.FindGameObjectsWithTag("CastOrigin")[0].transform; // Assuming the first hand found is the correct one
         headTransform = GameObject.FindGameObjectsWithTag("Head")[0].transform; // Assuming the first head found is the correct one
 		castOrigin = handTransform; // Set cast origin to hand by default
     }
     void Update()
 	{
+		if (handTransform == null || headTransform == null)
+        TryFindTransforms();
 		if (!canCast || hasCast || handTransform == null || headTransform == null || castOrigin == null || fireballPrefab == null)
 			return;
 
@@ -40,6 +43,23 @@ public class FireballCasting : MonoBehaviour
 		{
 			poseTimer = 0f;
 		}
+	}
+
+	private void TryFindTransforms()
+	{
+		if (handTransform == null)
+    		{
+        		var castOrigins = GameObject.FindGameObjectsWithTag("CastOrigin");
+        		if (castOrigins.Length > 0)
+            	handTransform = castOrigins[0].transform;
+    		}
+    	if (headTransform == null)
+    	{
+        	var heads = GameObject.FindGameObjectsWithTag("Head");
+        	if (heads.Length > 0)
+            headTransform = heads[0].transform;
+    	}
+    		castOrigin = handTransform;
 	}
 
 	private bool IsHandFlatAndForward()

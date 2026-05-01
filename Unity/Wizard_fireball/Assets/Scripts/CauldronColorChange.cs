@@ -58,8 +58,21 @@ public class CauldronColorChange : MonoBehaviour
         {
             int randomIndex = Random.Range(0, materials.Length);
             GetComponent<Renderer>().material = materials[randomIndex];
-            Instantiate(vial, VialSpawnPoint.transform.position, Quaternion.identity); // Instantiate the vial above the cauldron
+            // Instantiate(vial, VialSpawnPoint.transform.position, Quaternion.identity); // Instantiate the vial above the cauldron
+            GameObject spawnedVial = Instantiate(vial, VialSpawnPoint.transform.position, Quaternion.identity);
+            Animator vialAnimator = spawnedVial.GetComponent<Animator>();
+            if (vialAnimator != null)
+            {
+                vialAnimator.enabled = false;
+                StartCoroutine(EnableVialAnimatorNextFrame(vialAnimator));
+            }
         }
+    }
+
+    private IEnumerator EnableVialAnimatorNextFrame(Animator vialAnimator)
+    {   
+        yield return null; // Wait for the next frame
+        vialAnimator.enabled = true;
     }
 }
 
