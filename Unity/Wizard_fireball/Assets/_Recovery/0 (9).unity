@@ -4983,8 +4983,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 458926242}
+  m_Children: []
   m_Father: {fileID: 2056936960}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &452223405
@@ -5090,37 +5089,6 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
---- !u!1 &458926241
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 458926242}
-  m_Layer: 0
-  m_Name: Head
-  m_TagString: Head
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &458926242
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 458926241}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 452223404}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &464908746
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7671,16 +7639,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FireballCasting
   handTransform: {fileID: 1753053289}
-  headTransform: {fileID: 458926242}
-  castOrigin: {fileID: 855920349}
+  headTransform: {fileID: 452223404}
+  castOrigin: {fileID: 1753053289}
   fireballPrefab: {fileID: 755610834349959337, guid: d2e2060a0c020ab46b176cdce91adebd, type: 3}
   fireballSpeed: 15
-  velocityMultiplier: 2
-  maxVelocityBoost: 3
-  requiredForwardDot: 1.79
-  requiredFlatDot: 1.66
-  velocityThreshold: 1.5
-  castCooldown: 0.5
+  requiredForwardDot: 0.7
+  requiredFlatDot: 0.7
+  poseHoldTime: 1
+  canCast: 1
+  hasCast: 0
 --- !u!1 &859321021
 GameObject:
   m_ObjectHideFlags: 0
@@ -9614,10 +9581,6 @@ PrefabInstance:
     - target: {fileID: 5125691253408308009, guid: 2e2164dc420107343aee0e78231db69a, type: 3}
       propertyPath: m_Name
       value: Mushroom_ingredient1 (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5125691253408308009, guid: 2e2164dc420107343aee0e78231db69a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12262,37 +12225,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0204815ed6d44124b96dba2ddd5ec69e, type: 3}
---- !u!1 &1540929175
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1540929176}
-  m_Layer: 0
-  m_Name: Hand
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1540929176
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1540929175}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1753053289}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1542357921
 GameObject:
   m_ObjectHideFlags: 0
@@ -14676,8 +14608,8 @@ Transform:
   - {fileID: 803195000}
   - {fileID: 2015729348}
   - {fileID: 70418867}
+  - {fileID: 6574771687485696090}
   - {fileID: 855920349}
-  - {fileID: 1540929176}
   m_Father: {fileID: 2056936960}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1754274045
@@ -18362,12 +18294,11 @@ MonoBehaviour:
   castOrigin: {fileID: 1653793663}
   fireballPrefab: {fileID: 8703098637960413914, guid: baee67e06640107438f612835f032582, type: 3}
   fireballSpeed: 15
-  velocityMultiplier: 2
-  maxVelocityBoost: 3
   requiredForwardDot: 0.7
   requiredFlatDot: 0.7
-  velocityThreshold: 1.5
-  castCooldown: 0.5
+  poseHoldTime: 0.5
+  canCast: 1
+  hasCast: 0
 --- !u!1 &2113815131
 GameObject:
   m_ObjectHideFlags: 0
@@ -19254,17 +19185,13 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4157096750193393628, guid: b484620099d1eba46abe2b94597b2e4e, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4157096750193393628, guid: b484620099d1eba46abe2b94597b2e4e, type: 3}
       propertyPath: drinkDistance
-      value: 0.5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4157096750193393628, guid: b484620099d1eba46abe2b94597b2e4e, type: 3}
       propertyPath: headTransform
       value: 
-      objectReference: {fileID: 458926242}
+      objectReference: {fileID: 452223404}
     - target: {fileID: 4157096750193393628, guid: b484620099d1eba46abe2b94597b2e4e, type: 3}
       propertyPath: fireballCasting
       value: 
@@ -19272,10 +19199,6 @@ PrefabInstance:
     - target: {fileID: 8822949254287024434, guid: b484620099d1eba46abe2b94597b2e4e, type: 3}
       propertyPath: m_Name
       value: MagicalPotionn
-      objectReference: {fileID: 0}
-    - target: {fileID: 8822949254287024434, guid: b484620099d1eba46abe2b94597b2e4e, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -28477,8 +28400,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5797707973859029728}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.70283616, z: 0, w: 0.7113518}
-  m_LocalPosition: {x: 2.474, y: 1.886, z: 12.449}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalPosition: {x: -0.1805, y: -0.1175, z: 0}
   m_LocalScale: {x: 0.09738644, y: 0.09738644, z: 0.097386435}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -28487,8 +28410,8 @@ Transform:
   - {fileID: 4681004494825658427}
   - {fileID: 1831238057}
   - {fileID: 1904776126}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 89.31, z: 0}
+  m_Father: {fileID: 1753053289}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!4 &6612406319563319922
 Transform:
   m_ObjectHideFlags: 0
@@ -30846,4 +30769,3 @@ SceneRoots:
   - {fileID: 954592310}
   - {fileID: 7328327059033739009}
   - {fileID: 814616259167169794}
-  - {fileID: 6574771687485696090}

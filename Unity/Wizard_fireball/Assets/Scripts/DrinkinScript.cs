@@ -69,7 +69,7 @@ public class DrinkinScript : MonoBehaviour
         // }
         if (fireballCasting != null)
         {
-            fireballCasting.EnableCasting();
+            fireballCasting.castCooldown = 0f; // Reset cooldown to allow immediate casting
         }
         // Add drinking sound or particle effect here if needed
         // Start coroutine to destroy after animation

@@ -2,99 +2,122 @@ using UnityEngine;
 
 public class FireballCasting : MonoBehaviour
 {
-	[Header("Cast Settings")]
-	public Transform handTransform;
-	public Transform headTransform;
-	public Transform castOrigin;
-	public GameObject fireballPrefab;
-	public float fireballSpeed = 15f;
-	public float requiredForwardDot = 0.7f;
-	public float requiredFlatDot = 0.7f;
-	public float poseHoldTime = 0.5f;
+    [Header("References")]
+    public Transform handTransform;
+    public Transform headTransform;
+    public Transform castOrigin;
+    public GameObject fireballPrefab;
 
-	[Header("Runtime")]
-	public bool canCast;
-	public bool hasCast;
-	private float poseTimer;
+    [Header("Casting")]
+    public float fireballSpeed = 15f;
+    public float velocityMultiplier = 2f;
+    public float maxVelocityBoost = 3f;
+
+    [Header("Gesture Detection")]
+    public float requiredForwardDot = 0.7f;
+    public float requiredFlatDot = 0.7f;
+    public float velocityThreshold = 1.5f; // how hard you must thrust forward
+
+    [Header("Cooldown")]
+    public float castCooldown = 0.5f;
+
+    private float cooldownTimer;
+
+    private Vector3 lastHandPos;
+    private Vector3 handVelocity;
 
     void Start()
     {
-		TryFindTransforms();
-        handTransform = GameObject.FindGameObjectsWithTag("CastOrigin")[0].transform; // Assuming the first hand found is the correct one
-        headTransform = GameObject.FindGameObjectsWithTag("Head")[0].transform; // Assuming the first head found is the correct one
-		castOrigin = handTransform; // Set cast origin to hand by default
-    }
-    void Update()
-	{
-		if (handTransform == null || headTransform == null)
         TryFindTransforms();
-		if (!canCast || hasCast || handTransform == null || headTransform == null || castOrigin == null || fireballPrefab == null)
-			return;
 
-		if (IsHandFlatAndForward())
-		{
-			poseTimer += Time.deltaTime;
-			if (poseTimer >= poseHoldTime)
-			{
-				CastFireball();
-			}
-		}
-		else
-		{
-			poseTimer = 0f;
-		}
-	}
+        if (handTransform != null)
+            lastHandPos = handTransform.position;
+    }
 
-	private void TryFindTransforms()
-	{
-		if (handTransform == null)
-    		{
-        		var castOrigins = GameObject.FindGameObjectsWithTag("CastOrigin");
-        		if (castOrigins.Length > 0)
-            	handTransform = castOrigins[0].transform;
-    		}
-    	if (headTransform == null)
-    	{
-        	var heads = GameObject.FindGameObjectsWithTag("Head");
-        	if (heads.Length > 0)
-            headTransform = heads[0].transform;
-    	}
-    		castOrigin = handTransform;
-	}
+    void Update()
+    {
+        if (handTransform == null || headTransform == null)
+            TryFindTransforms();
 
-	private bool IsHandFlatAndForward()
-	{
-		Vector3 headForward = headTransform.forward;
-		Vector3 handForward = handTransform.forward;
-		Vector3 handUp = handTransform.up;
+        if (handTransform == null || headTransform == null || fireballPrefab == null)
+            return;
 
-		float forwardDot = Vector3.Dot(handForward, headForward);
-		float flatDot = Mathf.Abs(Vector3.Dot(handUp, Vector3.up));
+        // Update cooldown
+        if (cooldownTimer > 0f)
+            cooldownTimer -= Time.deltaTime;
 
-		return forwardDot >= requiredForwardDot && flatDot >= requiredFlatDot;
-	}
+        // Track hand velocity
+        handVelocity = (handTransform.position - lastHandPos) / Time.deltaTime;
+        lastHandPos = handTransform.position;
 
-	private void CastFireball()
-	{
-		if (fireballPrefab == null || castOrigin == null)
-			return;
+        // Check if gesture is valid
+        if (cooldownTimer <= 0f && IsHandFlatAndForward() && IsThrustingForward())
+        {
+            CastFireball();
+        }
+    }
 
-		hasCast = true;
-		canCast = false;
-		poseTimer = 0f;
+    private void TryFindTransforms()
+    {
+        if (handTransform == null)
+        {
+            var castOrigins = GameObject.FindGameObjectsWithTag("CastOrigin");
+            if (castOrigins.Length > 0)
+                handTransform = castOrigins[0].transform;
+        }
 
-		GameObject fireball = Instantiate(fireballPrefab, castOrigin.position, castOrigin.rotation);
-		Rigidbody rb = fireball.GetComponent<Rigidbody>();
-		if (rb != null)
-		{
-			rb.linearVelocity = castOrigin.forward * fireballSpeed;
-		}
-	}
+        if (headTransform == null)
+        {
+            var heads = GameObject.FindGameObjectsWithTag("Head");
+            if (heads.Length > 0)
+                headTransform = heads[0].transform;
+        }
 
-	public void EnableCasting()
-	{
-		canCast = true;
-		hasCast = false;
-		poseTimer = 0f;
-	}
+        if (castOrigin == null && handTransform != null)
+            castOrigin = handTransform;
+    }
+
+    private bool IsHandFlatAndForward()
+    {
+        Vector3 headForward = headTransform.forward;
+        Vector3 handForward = handTransform.forward;
+        Vector3 handUp = handTransform.up;
+
+        float forwardDot = Vector3.Dot(handForward, headForward);
+        float flatDot = Mathf.Abs(Vector3.Dot(handUp, Vector3.up));
+
+        return forwardDot >= requiredForwardDot && flatDot >= requiredFlatDot;
+    }
+
+    private bool IsThrustingForward()
+    {
+        // Check if hand velocity is going forward relative to head
+        float forwardVelocity = Vector3.Dot(handVelocity.normalized, headTransform.forward);
+
+        return handVelocity.magnitude > velocityThreshold && forwardVelocity > 0.7f;
+    }
+
+    private void CastFireball()
+    {
+        if (castOrigin == null) return;
+
+        cooldownTimer = castCooldown;
+
+        GameObject fireball = Instantiate(fireballPrefab, castOrigin.position, castOrigin.rotation);
+
+        // Ensure Rigidbody exists
+        Rigidbody rb = fireball.GetComponent<Rigidbody>();
+        if (rb == null)
+        {
+            rb = fireball.AddComponent<Rigidbody>();
+            rb.useGravity = false;
+        }
+
+        // Scale power by hand speed
+        float speedBoost = Mathf.Clamp(handVelocity.magnitude * velocityMultiplier, 0f, maxVelocityBoost);
+
+        rb.linearVelocity = castOrigin.forward * (fireballSpeed + speedBoost);
+
+        Destroy(fireball, 5f);
+    }
 }
