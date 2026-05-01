@@ -35,6 +35,7 @@ TagManager:
   - Head
   - Hand
   - CastOrigin
+  - FireballSpell
   layers:
   - Default
   - TransparentFX
