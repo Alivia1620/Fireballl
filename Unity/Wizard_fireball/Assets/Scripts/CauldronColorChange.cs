@@ -10,6 +10,7 @@ public class CauldronColorChange : MonoBehaviour
     public Material[] materials; // Array of materials to change the cauldron color
     public GameObject vial;
     public float vialSpawnHeight = 2f;
+    public GameObject VialSpawnPoint;
 
     void Start()
     {
@@ -57,7 +58,7 @@ public class CauldronColorChange : MonoBehaviour
         {
             int randomIndex = Random.Range(0, materials.Length);
             GetComponent<Renderer>().material = materials[randomIndex];
-            Instantiate(vial, transform.position + Vector3.up * vialSpawnHeight, Quaternion.identity); // Instantiate the vial above the cauldron
+            Instantiate(vial, VialSpawnPoint.transform.position, Quaternion.identity); // Instantiate the vial above the cauldron
         }
     }
 }

@@ -15,7 +15,7 @@ public class DrinkinScript : MonoBehaviour
 
     void Start()
     {
-        animator = GetComponent<Animator>();
+        // animator = GetComponent<Animator>();
         grabInteractable = GetComponent<XRGrabInteractable>();
         if (animator == null)
         {
@@ -37,6 +37,8 @@ public class DrinkinScript : MonoBehaviour
 
     void OnTriggerStay(Collider collision)
     {
+        //find the collision animator
+        Animator collisionAnimator = collision.GetComponent<Animator>();
         if (hasDrunk || grabInteractable == null)
             return;
 

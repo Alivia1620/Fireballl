@@ -22,15 +22,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 22301fc2266111e4fb0684ceba27a7d9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.14123328
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 22301fc2266111e4fb0684ceba27a7d9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.283
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 22301fc2266111e4fb0684ceba27a7d9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.26490563
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 22301fc2266111e4fb0684ceba27a7d9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -106,7 +106,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7106514960822546154}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 9bbef4e960308a949a5b5359d8e6ad98, type: 2}
   m_CullingMode: 0
@@ -163,7 +163,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
