@@ -39,7 +39,7 @@ public class DrinkinScript : MonoBehaviour
         if (hasDrunk || grabInteractable == null)
             return;
 
-        if (grabInteractable.isSelected && collision.CompareTag("head"))
+        if (grabInteractable.isSelected && collision.CompareTag("Head"))
         {
             DrinkPotion();
         }
