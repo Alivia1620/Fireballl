@@ -15,6 +15,7 @@ public class DrinkinScript : MonoBehaviour
 
     void Start()
     {
+        animator = GetComponent<Animator>();
         grabInteractable = GetComponent<XRGrabInteractable>();
         if (animator == null)
         {

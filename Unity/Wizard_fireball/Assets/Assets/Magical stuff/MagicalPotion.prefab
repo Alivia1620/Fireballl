@@ -82,9 +82,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 22301fc2266111e4fb0684ceba27a7d9, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 505768062804816874}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 22301fc2266111e4fb0684ceba27a7d9, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 8306651832144031174}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 22301fc2266111e4fb0684ceba27a7d9, type: 3}
       insertIndex: -1
@@ -101,24 +98,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 22301fc2266111e4fb0684ceba27a7d9, type: 3}
   m_PrefabInstance: {fileID: 7952794428238631867}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &505768062804816874
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7106514960822546154}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 824fa4de1da060443b53056aff054f92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DrinkinScript
-  drinkDistance: 0.3
-  animator: {fileID: 8306651832144031174}
-  drinkAnimationBool: drink
-  headTransform: {fileID: 0}
-  fireballCasting: {fileID: 0}
-  drinkAnimationDuration: 2
 --- !u!95 &8306651832144031174
 Animator:
   serializedVersion: 7
