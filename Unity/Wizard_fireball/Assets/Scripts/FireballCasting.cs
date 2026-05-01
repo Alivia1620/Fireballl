@@ -17,7 +17,13 @@ public class FireballCasting : MonoBehaviour
 	public bool hasCast;
 	private float poseTimer;
 
-	void Update()
+    void Start()
+    {
+        handTransform = GameObject.FindGameObjectsWithTag("CastOrigin")[0].transform; // Assuming the first hand found is the correct one
+        headTransform = GameObject.FindGameObjectsWithTag("Head")[0].transform; // Assuming the first head found is the correct one
+		castOrigin = handTransform; // Set cast origin to hand by default
+    }
+    void Update()
 	{
 		if (!canCast || hasCast || handTransform == null || headTransform == null || castOrigin == null || fireballPrefab == null)
 			return;

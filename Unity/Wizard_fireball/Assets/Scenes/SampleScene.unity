@@ -5242,7 +5242,7 @@ GameObject:
   - component: {fileID: 651136932}
   m_Layer: 0
   m_Name: OriginPoint
-  m_TagString: Untagged
+  m_TagString: CastOrigin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
